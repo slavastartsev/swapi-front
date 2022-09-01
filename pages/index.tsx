@@ -25,6 +25,8 @@ const controlWrapperStyles: CSSProperties = {
   marginTop: '1rem',
 };
 
+const isServer = typeof window === 'undefined';
+
 const ENTRIES_PER_PAGE = 10;
 
 const detaultData = {
@@ -70,7 +72,7 @@ const HomePage: NextPage = () => {
     <tr key={index}>
       {fieldOrder.map((field) => (
         <td key={field} width={cellWidthByField[field]}>
-          <Skeleton height={21} visible={isLoading}>
+          <Skeleton height={21} visible={isLoading || isServer}>
             {field === 'name' ? (
               <Link
                 href={
@@ -99,7 +101,10 @@ const HomePage: NextPage = () => {
 
   return (
     <>
-      <Table striped={!isLoading} highlightOnHover={!isLoading}>
+      <Table
+        striped={!isLoading && !isServer}
+        highlightOnHover={!isLoading && !isServer}
+      >
         <thead>
           <tr>
             {fieldOrder.map((field) => (
@@ -109,7 +114,11 @@ const HomePage: NextPage = () => {
         </thead>
         <tbody>{rows}</tbody>
       </Table>
-      <Skeleton height={36} visible={isLoading} style={controlWrapperStyles}>
+      <Skeleton
+        height={36}
+        visible={isLoading || isServer}
+        style={controlWrapperStyles}
+      >
         <Input
           autoFocus
           autoComplete="off"

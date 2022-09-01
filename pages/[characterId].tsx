@@ -1,15 +1,7 @@
 import { CSSProperties } from 'react';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import {
-  Box,
-  Center,
-  NavLink,
-  Skeleton,
-  Space,
-  Text,
-  Title,
-} from '@mantine/core';
+import { Box, Center, NavLink, Skeleton, Text, Title } from '@mantine/core';
 import { useQuery } from 'react-query';
 import { IconChevronLeft } from '@tabler/icons';
 
@@ -19,7 +11,7 @@ import { fieldOrder, labelByField } from '../config/pageConfig';
 
 const title = 'Character info';
 
-const contentWrapperStyles: CSSProperties = { marginLeft: 36 };
+const isServer = typeof window === 'undefined';
 
 const CharacterPage: NextPage = () => {
   const router = useRouter();
@@ -37,23 +29,20 @@ const CharacterPage: NextPage = () => {
       <Box>
         <Title order={1}>{title}</Title>
         {fieldOrder.map((field) => (
-          <div style={contentWrapperStyles} key={field}>
-            <Space h="xs" />
-            <Text span>
-              <Skeleton height={21} visible={isLoading}>
-                <Text weight={700} span>
-                  {labelByField[field]}
-                </Text>{' '}
-                {data?.[field]}
-              </Skeleton>
-            </Text>
-          </div>
+          <Text key={field} mt="xs" ml="xl">
+            <Skeleton height={21} visible={isLoading || isServer}>
+              <Text weight={700} span>
+                {labelByField[field]}
+              </Text>{' '}
+              {data?.[field]}
+            </Skeleton>
+          </Text>
         ))}
-        <Space h="xl" />
         <NavLink
           label="Back"
           icon={<IconChevronLeft size={12} stroke={1.5} />}
           onClick={router.back}
+          mt="xl"
         />
       </Box>
     </Center>
