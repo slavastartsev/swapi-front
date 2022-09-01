@@ -9,9 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.0",
+    "@emotion/server": "^11.10.0",
+    "@mantine/core": "^5.2.3",
+    "@mantine/hooks": "^5.2.3",
+    "@mantine/next": "^5.2.3",
+    "@tabler/icons": "^1.91.0",
     "next": "12.2.5",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-query": "^3.39.2",
+    "swapi-typescript": "^0.0.2",
+    "urlpattern-polyfill": "^5.0.6",
+    "use-debounce": "^8.0.3"
   },
   "devDependencies": {
     "@types/node": "18.7.13",
